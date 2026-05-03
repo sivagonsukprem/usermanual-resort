@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คู่มือการใช้งาน - ระบบจองห้องพัก PMS</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; color: #333; }
+
+  .header {
+    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .header h1 { font-size: 2rem; margin-bottom: 8px; }
+  .header p { font-size: 1rem; opacity: 0.85; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 30px 20px; }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #1a73e8;
+  }
+  .section-title .icon { font-size: 1.8rem; }
+  .section-title h2 { font-size: 1.4rem; color: #1a73e8; }
+
+  .step-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .step-number {
+    background: linear-gradient(135deg, #1a73e8, #0d47a1);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-content h3 { font-size: 1.1rem; color: #1a73e8; margin-bottom: 8px; }
+  .step-content p { color: #555; line-height: 1.7; font-size: 0.95rem; }
+  .step-content ul { color: #555; line-height: 1.9; font-size: 0.95rem; padding-left: 20px; margin-top: 8px; }
+
+  .img-wrap { text-align: center; margin: 12px 0 4px; }
+  .img-wrap img {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #e0e7ff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .img-wrap img.wide { max-width: 100%; }
+  .img-caption { font-size: 0.8rem; color: #888; margin-top: 6px; }
+
+  .highlight-box {
+    background: #e8f5e9;
+    border-left: 4px solid #43a047;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    font-size: 0.92rem;
+    color: #2e7d32;
+  }
+  .sms-box {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 12px;
+    font-size: 0.92rem;
+  }
+  .sms-box .sms-header { font-weight: bold; color: #f57f17; margin-bottom: 8px; font-size: 1rem; }
+  .sms-box .sms-body {
+    background: white;
+    border-radius: 8px;
+    padding: 12px 16px;
+    border: 1px solid #ffe082;
+    line-height: 1.8;
+    color: #333;
+  }
+  .telegram-box {
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 12px;
+    font-size: 0.92rem;
+  }
+  .telegram-box .tg-header { font-weight: bold; color: #1565c0; margin-bottom: 8px; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 2px;
+  }
+  .badge-green { background: #c8e6c9; color: #2e7d32; }
+  .badge-blue { background: #bbdefb; color: #1565c0; }
+  .badge-orange { background: #ffe0b2; color: #e65100; }
+
+  .flow-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-bottom: 30px;
+  }
+  .flow-item {
+    background: #e8f0fe;
+    color: #1a73e8;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .flow-arrow { color: #aaa; font-size: 1.2rem; }
+
+  .footer {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 20px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  @media (max-width: 600px) {
+    .step-card { flex-direction: column; }
+    .header h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>&#x1F4CB; คู่มือการใช้งานระบบจองห้องพัก</h1>
+  <p>แก่งกระจาน ริเวอร์ รีสอร์ท &nbsp;·&nbsp; Property Management System (PMS)</p>
+</div>
+
+<div class="container">
+
+  <!-- Flow Overview -->
+  <div class="section-title">
+    <span class="icon">&#x1F5FA;&#xFE0F;</span>
+    <h2>ภาพรวมขั้นตอนการจอง</h2>
+  </div>
+  <div class="flow-bar">
+    <span class="flow-item">1. ลูกค้าเลือกวันที่</span>
+    <span class="flow-arrow">&#x2192;</span>
+    <span class="flow-item">2. เลือกห้องพัก</span>
+    <span class="flow-arrow">&#x2192;</span>
+    <span class="flow-item">3. กรอกข้อมูล</span>
+    <span class="flow-arrow">&#x2192;</span>
+    <span class="flow-item">4. แจ้งเตือน Telegram</span>
+    <span class="flow-arrow">&#x2192;</span>
+    <span class="flow-item">5. เจ้าของยืนยัน + SMS</span>
+    <span class="flow-arrow">&#x2192;</span>
+    <span class="flow-item">6. ลูกค้าโอนเงิน</span>
+    <span class="flow-arrow">&#x2192;</span>
+    <span class="flow-item">7. เจ้าของยืนยันรับยอด</span>
+    <span class="flow-arrow">&#x2192;</span>
+    <span class="flow-item">8. Check-in</span>
+  </div>
+
+  <!-- ส่วนที่ 1 -->
+  <div class="section-title">
+    <span class="icon">&#x1F4F1;</span>
+    <h2>ส่วนที่ 1 : ลูกค้าจองห้องพักผ่านมือถือ</h2>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">1</div>
+    <div class="step-content">
+      <h3>ลูกค้าเข้าเว็บจองห้องพัก</h3>
+      <p>ลูกค้าเปิดลิงค์ <strong>kaengkrachan.ltnnfamily.com</strong> ในมือถือ เลือก <strong>วันเช็คอิน</strong> และ <strong>วันเช็คเอาท์</strong> ที่ต้องการ แล้วกดปุ่ม <strong>"ตรวจสอบห้องว่าง"</strong></p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/1.jpg" alt="หน้าเลือกวันที่">
+        <div class="img-caption">หน้าเลือกวันเช็คอิน / เช็คเอาท์</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">2</div>
+    <div class="step-content">
+      <h3>เลือกห้องพักที่ต้องการ</h3>
+      <p>ระบบแสดงรายการห้องพักที่ว่าง พร้อมรูปภาพ ราคา และความจุ ลูกค้าสามารถ <strong>เลื่อนดูรูปภาพ</strong> ของแต่ละห้องได้ แล้วกดเลือกห้องที่ต้องการ</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/2.jpg" alt="เลือกห้องพัก">
+        <div class="img-caption">หน้าเลือกห้องพัก พร้อมรูปและราคา</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">3</div>
+    <div class="step-content">
+      <h3>กรอกข้อมูลผู้จอง</h3>
+      <p>ลูกค้ากรอก <strong>ชื่อ-นามสกุล</strong>, <strong>เบอร์โทรศัพท์</strong> และอีเมล (ไม่บังคับ) แล้วกดปุ่ม <strong>"ยืนยันการจอง"</strong></p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/3.jpg" alt="กรอกข้อมูล">
+        <div class="img-caption">หน้ากรอกข้อมูลผู้จอง</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">4</div>
+    <div class="step-content">
+      <h3>จองสำเร็จ — ได้รับรหัสการจอง</h3>
+      <p>ระบบแสดง <strong>รหัสการจอง</strong> (เช่น BK260315649) ให้ลูกค้าจดไว้ สถานะจะอยู่ที่ <strong>"รอยืนยัน"</strong> จนกว่าเจ้าของรีสอร์ทจะยืนยัน</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/4.jpg" alt="จองสำเร็จ">
+        <div class="img-caption">หน้าจองสำเร็จ พร้อมรหัสการจอง</div>
+      </div>
+      <div class="highlight-box">
+        &#x1F4A1; ระบบจะส่งข้อมูลการจองไปแจ้งเตือนเจ้าของรีสอร์ทผ่าน <strong>Telegram</strong> ทันที
+      </div>
+    </div>
+  </div>
+
+  <!-- ส่วนที่ 2 -->
+  <div class="section-title">
+    <span class="icon">&#x1F3E8;</span>
+    <h2>ส่วนที่ 2 : เจ้าของรีสอร์ทยืนยันการจอง</h2>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">5</div>
+    <div class="step-content">
+      <h3>รับแจ้งเตือนการจองใหม่ผ่าน Telegram</h3>
+      <p>เจ้าของรีสอร์ทได้รับข้อความใน <strong>Telegram</strong> ทันที แสดงข้อมูลครบ ได้แก่ รหัสจอง, ชื่อลูกค้า, เบอร์โทร, ห้อง, วันที่เข้า-ออก และยอดเงิน</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/5.jpg" alt="Telegram แจ้งเตือน">
+        <div class="img-caption">การแจ้งเตือนการจองใหม่ใน Telegram</div>
+      </div>
+      <div class="telegram-box">
+        <div class="tg-header">&#x1F4F2; ปุ่มใน Telegram</div>
+        <span class="badge badge-green">&#x2705; ยืนยันการจอง</span>
+        <span class="badge badge-orange">&#x274C; ยกเลิกการจอง</span>
+        <p style="margin-top:8px; color:#555;">กดปุ่มได้เลยจากมือถือ ไม่ต้องเข้าหน้าเว็บ</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">6</div>
+    <div class="step-content">
+      <h3>กดยืนยันการจอง &#x2192; ระบบส่ง SMS แจ้งลูกค้าอัตโนมัติ</h3>
+      <p>เมื่อเจ้าของกดปุ่ม <strong>"&#x2705; ยืนยันการจอง"</strong> ใน Telegram ระบบจะ:</p>
+      <ul>
+        <li>เปลี่ยนสถานะการจองเป็น <strong>"ยืนยันแล้ว"</strong></li>
+        <li>ส่ง <strong>SMS อัตโนมัติ</strong> ไปยังเบอร์โทรลูกค้าทันที</li>
+        <li>แสดงข้อความยืนยันกลับใน Telegram พร้อมชื่อลูกค้าและห้อง</li>
+      </ul>
+      <div class="img-wrap" style="margin-top:12px;">
+        <img src="รูปภาพการทำรายการ/6.jpg" alt="ยืนยันใน Telegram">
+        <div class="img-caption">Telegram แสดงผลยืนยันการจองพร้อมชื่อลูกค้าและห้อง</div>
+      </div>
+
+      <div class="sms-box">
+        <div class="sms-header">&#x1F4F1; ตัวอย่าง SMS ที่ลูกค้าได้รับ</div>
+        <div class="sms-body">
+          <strong>Resort</strong><br><br>
+          แก่งกระจาน ริเวอร์ รีสอร์ท ได้รับรายการจองของคุณแล้วครับ &#x1F334;<br><br>
+          &#x1F4C5; วันห้องพัก: 18 มีนาคม 2569 – 19 มีนาคม 2569 (1 คืน)<br>
+          &#x1F4B0; ราคาห้องพัก: คืนละ 1,200 ฿<br>
+          &#x1F4B0; ครบรวมเงิน: 1,200 ฿<br><br>
+          รบกวนลูกค้าทำโอนเงินชำระค่าห้องพัก ขอบคุณมากครับ &#x1F60A;<br><br>
+          &#x1F517; kaengkrachan.ltnnfamily.com/book/2?tab=check&amp;code=BK260315649&amp;phone=08XXXXXXXX
+        </div>
+      </div>
+
+      <div class="img-wrap" style="margin-top:16px;">
+        <img src="รูปภาพการทำรายการ/6_1.png" alt="SMS ที่ลูกค้าได้รับ">
+        <div class="img-caption">SMS ที่ลูกค้าได้รับบนมือถือ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">7</div>
+    <div class="step-content">
+      <h3>เจ้าของสามารถยืนยันผ่านหน้าเว็บหลังบ้านได้เช่นกัน</h3>
+      <p>นอกจาก Telegram แล้ว เจ้าของยังสามารถจัดการยืนยันการจองและยืนยันรับยอดเงินผ่านหน้า <strong>รายการจอง</strong> ในระบบ PMS ได้โดยตรง</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/7.jpg" alt="หน้าหลังบ้าน" class="wide">
+        <div class="img-caption">หน้ารายการจองในระบบ PMS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ส่วนที่ 3 -->
+  <div class="section-title">
+    <span class="icon">&#x1F4B8;</span>
+    <h2>ส่วนที่ 3 : ลูกค้าชำระเงินมัดจำ</h2>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">8</div>
+    <div class="step-content">
+      <h3>ลูกค้ากดลิงค์ใน SMS เพื่อโอนเงิน</h3>
+      <p>ลูกค้ากดลิงค์ใน SMS ระบบพาไปยังหน้าตรวจสอบการจองอัตโนมัติ ลูกค้าเลือกชำระ <strong>มัดจำ 50%</strong> หรือ <strong>เต็มจำนวน</strong> แล้วเลือกช่องทางการโอนเงิน (พร้อมเพย์/โอนธนาคาร)</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/9.jpg" alt="หน้าชำระเงิน">
+        <div class="img-caption">ลูกค้าเลือกยอดชำระและช่องทางการโอนเงิน</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ส่วนที่ 4 -->
+  <div class="section-title">
+    <span class="icon">&#x2705;</span>
+    <h2>ส่วนที่ 4 : เจ้าของตรวจสอบและยืนยันรับยอดเงิน</h2>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">9</div>
+    <div class="step-content">
+      <h3>ระบบแจ้งเตือน Telegram เมื่อลูกค้าแนบสลิป</h3>
+      <p>เมื่อลูกค้าโอนเงินและแนบสลิปในระบบ เจ้าของรีสอร์ทจะได้รับแจ้งเตือนใน <strong>Telegram</strong> ทันที พร้อมลิงค์ดูสลิป</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/11.jpg" alt="แจ้งเตือนสลิป">
+        <div class="img-caption">Telegram แจ้งเตือนลูกค้าแนบสลิปพร้อมปุ่มยืนยันรับยอด</div>
+      </div>
+      <div class="telegram-box">
+        <div class="tg-header">&#x1F4F2; ปุ่มใน Telegram</div>
+        <span class="badge badge-green">&#x2705; ยืนยันรับยอด</span>
+        <p style="margin-top:8px; color:#555;">กดเพื่อยืนยันว่าได้รับเงินครบถ้วนแล้ว</p>
+      </div>
+      <div class="img-wrap" style="margin-top:16px;">
+        <img src="รูปภาพการทำรายการ/9_1.jpg" alt="ยืนยันรับยอด">
+        <div class="img-caption">Telegram แสดงผลการยืนยันรับยอดเงิน</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">10</div>
+    <div class="step-content">
+      <h3>ลูกค้าเห็นสถานะอัพเดทในระบบ</h3>
+      <p>หลังจากแนบสลิป ลูกค้าสามารถตรวจสอบสถานะได้ในระบบ จะแสดงว่า <strong>"รอยืนยันการชำระเงิน — ทางที่พักได้รับสลิปของคุณแล้ว กำลังตรวจสอบ"</strong></p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/10.jpg" alt="สถานะหลังโอน">
+        <div class="img-caption">หน้าสถานะหลังลูกค้าแนบสลิปโอนเงิน</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ส่วนที่ 5 -->
+  <div class="section-title">
+    <span class="icon">&#x1F3E0;</span>
+    <h2>ส่วนที่ 5 : วันเช็คอิน — รับชำระยอดที่เหลือและ Check-in</h2>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">11</div>
+    <div class="step-content">
+      <h3>รับชำระยอดที่เหลือจากลูกค้า</h3>
+      <p>วันที่ลูกค้ามาถึง เจ้าของเปิดหน้า <strong>รายการจอง</strong> กดปุ่ม <strong>"ชำระเงิน"</strong> ระบบแสดงยอดที่ต้องรับ เลือกวิธีชำระ (เงินสด / โอนธนาคาร / พร้อมเพย์) แล้วกดยืนยัน</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/12.jpg" alt="รับชำระ" class="wide">
+        <div class="img-caption">หน้ารับชำระยอดที่เหลือวันเช็คอิน</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">12</div>
+    <div class="step-content">
+      <h3>พิมพ์ใบรับเงินให้ลูกค้า</h3>
+      <p>หลังรับชำระสำเร็จ กดปุ่ม <strong>"พิมพ์ใบรับเงิน"</strong> เพื่อออกใบเสร็จให้ลูกค้า</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px;">
+        <div class="img-wrap">
+          <img src="รูปภาพการทำรายการ/13.jpg" alt="รับชำระสำเร็จ">
+          <div class="img-caption">หน้ารับชำระเงินสำเร็จ</div>
+        </div>
+        <div class="img-wrap">
+          <img src="รูปภาพการทำรายการ/14.jpg" alt="ใบรับเงิน" style="max-width:200px;">
+          <div class="img-caption">ใบรับเงิน / Payment Receipt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">13</div>
+    <div class="step-content">
+      <h3>กด Check-in เพื่อยืนยันการเข้าพัก</h3>
+      <p>เมื่อลูกค้าชำระครบแล้ว สถานะเปลี่ยนเป็น <strong>"ชำระครบแล้ว"</strong> เจ้าของกดปุ่ม <strong>"Check-in"</strong> เพื่อยืนยันการเข้าพักอย่างเป็นทางการ</p>
+      <div class="img-wrap">
+        <img src="รูปภาพการทำรายการ/15.jpg" alt="Check-in" class="wide">
+        <div class="img-caption">กด Check-in หลังชำระครบ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ส่วนที่ 6 -->
+  <div class="section-title">
+    <span class="icon">&#x1F4C5;</span>
+    <h2>ส่วนที่ 6 : ปฏิทินห้องพัก</h2>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">14</div>
+    <div class="step-content">
+      <h3>ดูภาพรวมการจองในปฏิทิน</h3>
+      <p>เจ้าของเปิดหน้า <strong>"ปฏิทิน"</strong> เพื่อดูสถานะห้องพักทั้งหมดรายเดือน กดที่ช่องใดก็ได้เพื่อดูรายละเอียดผู้เข้าพัก เบอร์โทร วันที่ และยอดชำระ</p>
+      <ul>
+        <li><span class="badge badge-green">&#x25A0; สีเขียว</span> ห้องว่าง</li>
+        <li><span class="badge badge-blue">&#x25A0; สีน้ำเงิน</span> จองแล้ว</li>
+        <li><span class="badge badge-orange">&#x25A0; สีส้ม</span> เข้าพักแล้ว</li>
+      </ul>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px;">
+        <div class="img-wrap">
+          <img src="รูปภาพการทำรายการ/17.jpg" alt="ปฏิทิน" class="wide" style="max-width:480px;">
+          <div class="img-caption">ปฏิทินห้องพักภาพรวมรายเดือน</div>
+        </div>
+        <div class="img-wrap">
+          <img src="รูปภาพการทำรายการ/16.jpg" alt="รายละเอียดปฏิทิน" style="max-width:380px;">
+          <div class="img-caption">กดช่องเพื่อดูรายละเอียดผู้เข้าพัก</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>&#x1F4CC; ระบบ PMS — แก่งกระจาน ริเวอร์ รีสอร์ท &nbsp;|&nbsp; พัฒนาโดย LTNN Family &nbsp;|&nbsp; kaengkrachan.ltnnfamily.com</p>
+</div>
+
+</body>
+</html>
